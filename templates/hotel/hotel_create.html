@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+</head>
+<body>
+
+<body>
+        <h2>Create New Hotel:</h2>
+        <form method="post" action="{% url 'hotel-create' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" style="background:Moccasin;border-radius:10px;border:2px">Create Hotel</button>
+        </form>
+
+</body>
+</html>
