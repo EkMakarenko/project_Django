@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hotel_update</title>
+    <link rel="stylesheet" text="text/css" href="{% static 'css/hotel_update.css' %}">
+</head>
+<body>
+
+        <h2>Update Info:</h2>
+        <form method="post" action="{% url 'hotel-update' form.instance.pk %} enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Update Hotel</button>
+        </form>
+
+</body>
+</html>
