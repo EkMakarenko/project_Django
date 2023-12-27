@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from hotel.models import Hotel, Apartment, ApartmentInfo
+from hotel.models import Hotel, Apartment, ApartmentInfo, HotelApartment
 
 
 # Register your models here.
@@ -15,7 +15,12 @@ class HotelAdmin(admin.ModelAdmin):
 
 @admin.register(Apartment)
 class ApartmentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'numer_of_beds',)
+    list_display = ('id', 'numer_of_beds')
+
+
+@admin.register(HotelApartment)
+class HotelApartmentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'hotel', 'apartment')
 
 
 @admin.register(ApartmentInfo)

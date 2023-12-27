@@ -6,6 +6,15 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 
+class Apartment(models.Model):
+    numer_of_beds = models.PositiveIntegerField(name=False, validators=[MinValueValidator(1.), MaxValueValidator(10.)])
+
+    # hotel = models.ManyToManyField(Hotel, through="HotelApartment")
+
+    def __int__(self):
+        return self.numer_of_beds
+
+
 class Hotel(models.Model):
     name = models.CharField(max_length=20, null=False)
     country = models.CharField(max_length=30, null=False)
@@ -17,18 +26,10 @@ class Hotel(models.Model):
     rating = models.FloatField(name=False, validators=[MinValueValidator(1.), MaxValueValidator(10.)])
     is_deleted = models.BooleanField(null=False, default=False)
 
+    apartment = models.ManyToManyField(Apartment, through='HotelApartment')
+
     def __str__(self):
         return self.name
-
-
-class Apartment(models.Model):
-    # hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-    numer_of_beds = models.PositiveIntegerField(name=False, validators=[MinValueValidator(1.), MaxValueValidator(10.)])
-
-    hotel = models.ManyToManyField(Hotel, through="HotelApartment")
-
-    def __str__(self):
-        return self.numer_of_beds
 
 
 class ApartmentInfo(models.Model):
