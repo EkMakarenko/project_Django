@@ -67,4 +67,3 @@ class HotelUpdateView(generic.UpdateView):
 
     def get_success_url(self):
         return reverse('hotel-list')
-

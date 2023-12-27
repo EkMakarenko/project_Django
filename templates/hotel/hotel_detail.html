@@ -1,16 +1,33 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>HOTEL DETAIL</title>
+    <link rel="stylesheet" text="text/css" href="{% static 'css/hotel.css' %}">
 </head>
-<body>
 
+<body>
     <h1>HOTEL DETAIL</h1>
+
+    <br>
+    <br>
+
+
+    {% if hotel_detail.photo %}
+        <img src="{{ hotel_detail.photo.url }}" alt="">
+    {% else %}
+        <h4>No Photo</h4>
+    {% endif %}
+
+    <br>
+    <br>
 
     {% if hotel_detail %}
 
-        <table width=100% border="1px solid" bgcolor="#5f9ea0">
+        <table>
              <tr>
                  <th>Name</th>
                  <th>Country</th>
@@ -36,6 +53,13 @@
                             <br>
                         {% endfor %}
                     </td>
+<!--                    <td>-->
+<!--                    {% if hotel_detail.photo %}-->
+<!--                        <img src="{{ hotel_detail.photo.url }}" alt="">-->
+<!--                    {% else %}-->
+<!--                        <h4>No Photo</h4>-->
+<!--                    {% endif %}-->
+<!--                    </td>-->
                 </tr>
         </table>
 
@@ -51,7 +75,7 @@
 
 
         <h2>COMMENTS:</h2>
-        <table width=100% border="1px solid" bgcolor="#6495ed">
+        <table>
             <tr>
                 <th>Text</th>
                 <th>Rating</th>
@@ -75,17 +99,6 @@
 
         <br>
 
-        <h2>APARTMENTS</h2>
-<!--        <ol>-->
-<!--            {% for apartment in apartment %}-->
-<!--                <li>-->
-<!--                    <h4>{{ apartment.numer_of_bedrooms }}</h4>-->
-<!--                </li>-->
-<!--            {% endfor %}-->
-<!--        </ol>-->
-
-
     {% else %}
         <h1>NOT FOUND</h1>
     {% endif %}
-

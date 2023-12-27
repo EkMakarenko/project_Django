@@ -22,6 +22,7 @@ class Hotel(models.Model):
     street = models.CharField(max_length=50, null=False)
     house_number = models.CharField(max_length=20, null=False)
     description = models.TextField()
+    photo = models.ImageField(upload_to='hotel/', blank=True, null=True)
 
     rating = models.FloatField(name=False, validators=[MinValueValidator(1.), MaxValueValidator(10.)])
     is_deleted = models.BooleanField(null=False, default=False)
