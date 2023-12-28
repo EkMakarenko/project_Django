@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 
 # Create your models here.
@@ -7,11 +8,9 @@ from django.db import models
 
 
 class Apartment(models.Model):
-    numer_of_beds = models.PositiveIntegerField(name=False, validators=[MinValueValidator(1.), MaxValueValidator(10.)])
+    numer_of_beds = models.CharField(max_length=30, null=False)
 
-    # hotel = models.ManyToManyField(Hotel, through="HotelApartment")
-
-    def __int__(self):
+    def __str__(self):
         return self.numer_of_beds
 
 
@@ -21,9 +20,9 @@ class Hotel(models.Model):
     city = models.CharField(max_length=30, null=False)
     street = models.CharField(max_length=50, null=False)
     house_number = models.CharField(max_length=20, null=False)
-    description = models.TextField()
+    description = RichTextField(blank=True, null=True)
+    photo_country = models.ImageField(upload_to='hotel/', blank=True, null=True)
     photo = models.ImageField(upload_to='hotel/', blank=True, null=True)
-
     rating = models.FloatField(name=False, validators=[MinValueValidator(1.), MaxValueValidator(10.)])
     is_deleted = models.BooleanField(null=False, default=False)
 
