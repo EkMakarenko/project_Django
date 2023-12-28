@@ -21,10 +21,13 @@
     {% else %}
         <h4>No Photo</h4>
     {% endif %}
-
     <br>
     <br>
-
+    <br>
+    <tr>{{ hotel_detail.description }}</tr>
+    <br>
+    <br>
+    <br>
     {% if hotel_detail %}
 
         <table>
@@ -34,7 +37,6 @@
                  <th>City</th>
                  <th>Street</th>
                  <th>House number</th>
-                 <th>Description</th>
                  <th>Rating</th>
                  <th>Apartment</th>
             </tr>
@@ -45,7 +47,6 @@
                     <td>{{ hotel_detail.city }}</td>
                     <td>{{ hotel_detail.street }}</td>
                     <td>{{ hotel_detail.house_number }}</td>
-                    <td>{{ hotel_detail.description }}</td>
                     <td>{{ hotel_detail.rating }}</td>
                     <td>
                         {% for apartment in hotel_detail.apartment.all %}
