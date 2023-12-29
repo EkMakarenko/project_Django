@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'hotel',
     'comment',
     'ckeditor',
+    'hotel_rest',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
