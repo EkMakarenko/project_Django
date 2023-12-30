@@ -29,7 +29,7 @@ class ApartmentCreateReadView(APIView):
 
 class ApartmentUpdateDeleteView(APIView):
     def get(self, request, pk):
-        apartment= ApartmentInfoRest.objects.get(id=pk)
+        apartment = ApartmentInfoRest.objects.get(id=pk)
         serializer = ApartmentRestSerializer(apartment)
         return Response({'apartment': serializer.data})
 
@@ -114,6 +114,6 @@ class HotelUpdateDeleteView(APIView):
         return Response({'update_hotel': list_serializer.data})
 
     def delete(self, request, pk):
-        hotel = get_object_or_404(ApartmentInfoRest.objects.all(), pk=pk)
+        hotel = get_object_or_404(HotelRest.objects.all(), pk=pk)
         hotel.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

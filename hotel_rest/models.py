@@ -15,7 +15,7 @@ class ApartmentInfoRest(models.Model):
     total_area = models.PositiveIntegerField(name=False)
     number_of_bathroom = models.PositiveIntegerField(name=False,validators=[MinValueValidator(1.), MaxValueValidator(10.)])
     price = models.PositiveIntegerField(name=False)
-    # apartment_id = models.ForeignKey(ApartmentRest, on_delete=models.CASCADE)
+    apartment = models.ForeignKey(ApartmentRest, related_name='apartment', on_delete=models.CASCADE)
 
 
 class HotelRest(models.Model):

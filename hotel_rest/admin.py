@@ -15,7 +15,7 @@ class ApartmentRestAdmin(admin.ModelAdmin):
 
 @admin.register(ApartmentInfoRest)
 class ApartmentInfoRestAdmin(admin.ModelAdmin):
-    list_display = ('total_area', 'number_of_bathroom', 'price',)
+    list_display = ('apartment', 'total_area', 'number_of_bathroom', 'price',)
     list_filter = ('total_area', 'price')
     search_fields = ['price']
     sortable_by = ('price', 'total_area')

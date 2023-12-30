@@ -17,7 +17,7 @@ class ApartmentRestSerializer(serializers.Serializer):
 
 
 class ApartmentInfoRestSerializer(serializers.Serializer):
-    # apartment_id = models.ForeignKey(ApartmentRest, on_delete=models.CASCADE)
+    apartment_id = serializers.IntegerField()
     total_area = serializers.IntegerField()
     number_of_bathroom = serializers.IntegerField()
     price = serializers.IntegerField()
@@ -26,6 +26,7 @@ class ApartmentInfoRestSerializer(serializers.Serializer):
         return ApartmentInfoRest.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
+        instance.apartment_id = validated_data.get('apartment_id', instance.apartment_id)
         instance.total_area = validated_data.get('total_area', instance.total_area)
         instance.number_of_bathroom = validated_data.get('number_of_bathroom', instance.number_of_bathroom)
         instance. price = validated_data.get('price', instance.price)
