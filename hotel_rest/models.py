@@ -10,12 +10,17 @@ class ApartmentRest(models.Model):
     def __str__(self):
         return self.numer_of_beds
 
+    @property
+    def full_info(self):
+        return f'{self.numer_of_beds}'
+
 
 class ApartmentInfoRest(models.Model):
     total_area = models.PositiveIntegerField(name=False)
     number_of_bathroom = models.PositiveIntegerField(name=False,validators=[MinValueValidator(1.), MaxValueValidator(10.)])
     price = models.PositiveIntegerField(name=False)
     apartment = models.ForeignKey(ApartmentRest, related_name='apartment', on_delete=models.CASCADE)
+    is_deleted = models.BooleanField(null=False, default=False)
 
 
 class HotelRest(models.Model):
