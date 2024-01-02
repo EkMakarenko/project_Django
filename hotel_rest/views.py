@@ -8,6 +8,7 @@
 from django_filters import rest_framework as django_filters
 from rest_framework.decorators import action
 from rest_framework import status, viewsets, generics, mixins, filters
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from hotel_rest.filters import HotelFilter, ApartmentInfoFilter
@@ -198,6 +199,7 @@ class ApartmentInfoViewSet(viewsets.ModelViewSet):
     ordering_fields = ('id', 'numer_of_beds', 'total_area', 'number_of_bathroom', 'price')
     search_fields = ('numer_of_beds', 'total_area', 'number_of_bathroom', 'price', 'hotel__name')
     pagination_class = ApartmentInfoPagination
+    permission_classes = (IsAuthenticated,)
 
     serializer_classes = {
         'list': ApartmentInfoListSerializer,
