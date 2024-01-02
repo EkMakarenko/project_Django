@@ -1,23 +1,16 @@
 from django.contrib import admin
 
-from hotel_rest.models import HotelRest, ApartmentInfoRest, ApartmentRest
+from hotel_rest.models import HotelRest, ApartmentInfoRest
 
 
 # Register your models here.
 
 
-@admin.register(ApartmentRest)
-class ApartmentRestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'numer_of_beds')
-    list_filter = ('numer_of_beds', )
-    search_fields = ('numer_of_beds',)
-
-
 @admin.register(ApartmentInfoRest)
 class ApartmentInfoRestAdmin(admin.ModelAdmin):
-    list_display = ('apartment', 'total_area', 'number_of_bathroom', 'price',)
-    list_filter = ('total_area', 'price')
-    search_fields = ['price']
+    list_display = ('id', 'numer_of_beds', 'total_area', 'number_of_bathroom', 'price',)
+    list_filter = ('numer_of_beds', 'total_area', 'number_of_bathroom', 'price',)
+    search_fields = ('numer_of_beds',)
     sortable_by = ('price', 'total_area')
 
 

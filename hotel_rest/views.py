@@ -1,17 +1,31 @@
-from django.db.migrations import serializer
-from django.shortcuts import render
-from rest_framework import status, viewsets, generics, mixins
-from rest_framework.decorators import action
-from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
-from rest_framework.views import APIView
+# from django.db.migrations import serializer
+# from django.shortcuts import render
+# from rest_framework.generics import get_object_or_404
+# from rest_framework.views import APIView
+# from hotel.models import ApartmentInfo
+#
 
-from hotel.models import ApartmentInfo
-from hotel_rest.models import ApartmentRest, ApartmentInfoRest, HotelRest
-from hotel_rest.serializers import ApartmentsRestSerializer, \
-    ApartmentInfoListSerializer, ApartmentInfoCreateSerializer, ApartmentInfoRetrieveSerializer, \
-    ApartmentInfoUpdateSerializer, ApartmentInfoRecentSerializer, HotelListSerializer, HotelCreateSerializer, \
-    HotelRetrieveSerializer, HotelUpdateSerializer, HotelRecentSerializer
+from django_filters import rest_framework as django_filters
+from rest_framework.decorators import action
+from rest_framework import status, viewsets, generics, mixins, filters
+from rest_framework.response import Response
+
+from hotel_rest.filters import HotelFilter, ApartmentInfoFilter
+from hotel_rest.models import ApartmentInfoRest, HotelRest
+from hotel_rest.pagination import ApartmentInfoPagination, HotelPagination
+from hotel_rest.serializers import (
+    ApartmentInfoListSerializer,
+    ApartmentInfoCreateSerializer,
+    ApartmentInfoRetrieveSerializer,
+    ApartmentInfoUpdateSerializer,
+    ApartmentInfoRecentSerializer,
+    HotelListSerializer,
+    HotelCreateSerializer,
+    HotelRetrieveSerializer,
+    HotelUpdateSerializer,
+    HotelRecentSerializer, ApartmentInfoImageUpdateSerializer, HotelImageUpdateSerializer,
+)
+from hotel_rest.services import ImageService
 
 
 # from hotel_rest.serializers import ApartmentRestSerializer, ApartmentInfoRestSerializer, HotelRestSerializer
@@ -178,12 +192,20 @@ from hotel_rest.serializers import ApartmentsRestSerializer, \
 class ApartmentInfoViewSet(viewsets.ModelViewSet):
     queryset = ApartmentInfoRest.objects.filter(is_deleted=False)
     serializer_class = ApartmentInfoListSerializer
+
+    filter_backends = (django_filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter)
+    filterset_class = ApartmentInfoFilter
+    ordering_fields = ('id', 'numer_of_beds', 'total_area', 'number_of_bathroom', 'price')
+    search_fields = ('numer_of_beds', 'total_area', 'number_of_bathroom', 'price', 'hotel__name')
+    pagination_class = ApartmentInfoPagination
+
     serializer_classes = {
         'list': ApartmentInfoListSerializer,
         'create': ApartmentInfoCreateSerializer,
         'retrieve': ApartmentInfoRetrieveSerializer,
         'update': ApartmentInfoUpdateSerializer,
         'recent_apartments': ApartmentInfoRecentSerializer,
+        'update_image': ApartmentInfoImageUpdateSerializer,
     }
 
     def get_serializer_class(self):
@@ -201,32 +223,34 @@ class ApartmentInfoViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_classes.get(self.action, self.serializer_class)(resent_apartments, many=True)
         return Response(serializer.data)
 
-# ______
-
-
-class ApartmentViewSet(viewsets.ModelViewSet):
-    queryset = ApartmentRest.objects.all()
-    serializer_class = ApartmentsRestSerializer
-
-    @action(detail=True, methods=['get'], url_path='info')
-    def apartment_info(self, request, pk=None):
+    @action(detail=True, methods=['patch'], url_path='update-image')
+    def update_image(self, request, pk=None):
         apartment = self.get_object()
-        apartment_info = apartment.apartment_info.all()
-        serializer = ApartmentInfoListSerializer(apartment_info, many=True)
-        return Response(serializer.data)
+        serializer = self.serializer_classes.get(self.action, self.serializer_class)(apartment, request.data, partial=True)
 
-# _______
+        ImageService.update_image(serializer=serializer, instance=apartment, request=request)
+
+        self.perform_update(serializer)
+        return Response(serializer.data)
 
 
 class HotelViewSet(viewsets.ModelViewSet):
     queryset = HotelRest.objects.all()
     serializer_class = HotelListSerializer
+    filter_backends = (django_filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter)
+    filterset_class = HotelFilter
+    ordering_fields = ('id', 'country', 'name', 'rating',)
+    ordering = ('-rating', )
+    search_fields = ('country', 'city', 'name', 'rating',)
+    pagination_class = HotelPagination
+
     serializer_classes = {
         'list': HotelListSerializer,
         'create': HotelCreateSerializer,
         'retrieve': HotelRetrieveSerializer,
         'update': HotelUpdateSerializer,
         'recent_hotels': HotelRecentSerializer,
+        'update_image': HotelImageUpdateSerializer,
     }
 
     def get_serializer_class(self):
@@ -236,4 +260,14 @@ class HotelViewSet(viewsets.ModelViewSet):
     def resent_hotel(self, request):
         resent_hotel = HotelRest.objects.filter(rating__gte=6)
         serializer = self.serializer_classes.get(self.action, self.serializer_class)(resent_hotel, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['patch'], url_path='update-image')
+    def update_image(self, request, pk=None):
+        hotel = self.get_object()
+        serializer = self.serializer_classes.get(self.action, self.serializer_class)(hotel, request.data, partial=True)
+
+        ImageService.update_image(serializer=serializer, instance=hotel, request=request)
+
+        self.perform_update(serializer)
         return Response(serializer.data)

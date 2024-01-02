@@ -34,19 +34,36 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split()
 
 # Application definition
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+CORE_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+]
+
+LOCAL_APPS = [
     'hotel',
     'comment',
-    'ckeditor',
     'hotel_rest',
-    'rest_framework',
 ]
+
+THIRD_PARTY_APPS = [
+    'ckeditor',
+    'rest_framework',
+    'django_filters'
+]
+
+INSTALLED_APPS = CORE_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKEND': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
