@@ -1,0 +1,39 @@
+table {
+    width: 100%;
+    border: 3px solid black;
+}
+
+
+th {
+    background-color: OliveDrab;
+    border: 1px solid black;
+}
+
+td {
+    background-color: DarkSeaGreen;
+    border: 1px solid black;
+}
+
+a {
+    display: inline-block;
+    margin-bottom: 10px;
+    background-color: Beige;
+    color: Beige;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+
+button {
+    background-color: OliveDrab ;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+h5 {
+    color: Black;
+}
