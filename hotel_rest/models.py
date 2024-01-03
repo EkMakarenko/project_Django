@@ -1,6 +1,9 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
+from hotel_rest.managers import ApartmentManager, UnavailableApartmentManager
+
+
 # Create your models here.
 
 
@@ -29,3 +32,8 @@ class ApartmentInfoRest(models.Model):
     hotel = models.ForeignKey(HotelRest, related_name='hotel', on_delete=models.CASCADE)
     is_deleted = models.BooleanField(null=False, default=False)
     image_apartment = models.ImageField(upload_to='apartment_rest/', null=True, blank=True)
+    is_available = models.BooleanField(null=False, default=True)
+
+    objects = models.Manager()
+    available_objects = ApartmentManager()
+    unavailable_objects = UnavailableApartmentManager()

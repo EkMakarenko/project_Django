@@ -2,7 +2,7 @@ from djoser.serializers import UserSerializer as BaseUserSerializer
 from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
 from rest_framework import serializers
 
-from authentication.models import Gender
+from authentication.models import Gender, CustomUser
 
 
 class UserSerializer(BaseUserSerializer):
@@ -31,6 +31,17 @@ class UserSerializer(BaseUserSerializer):
 class UserCreateSerializer(BaseUserCreateSerializer):
     class Meta(BaseUserCreateSerializer.Meta):
         fields = (
+            'username',
+            'email',
+            'phone_number',
+            'password'
+        )
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = (
             'first_name',
             'last_name',
             'username',
@@ -39,6 +50,5 @@ class UserCreateSerializer(BaseUserCreateSerializer):
             'gender',
             'birth_date',
             'country',
-            'city',
-            'password'
+            'city'
         )
