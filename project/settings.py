@@ -99,7 +99,7 @@ DJANGO_MIDDLEWARE = [
 ]
 
 CUSTOM_MIDDLEWARE = [
-    # 'hotel_rest.middleware.RequestTimeMiddleware',
+    'hotel_rest.middleware.RequestTimeMiddleware',
 ]
 
 MIDDLEWARE = DJANGO_MIDDLEWARE + CUSTOM_MIDDLEWARE
