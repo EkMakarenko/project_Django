@@ -60,6 +60,7 @@ THIRD_PARTY_APPS = [
     'djoser',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'debug_toolbar',
 ]
 
 INSTALLED_APPS = CORE_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -100,6 +101,16 @@ DJOSER = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient'
+        }
+    }
+}
+
 DJANGO_MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -108,6 +119,7 @@ DJANGO_MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 CUSTOM_MIDDLEWARE = [
@@ -115,6 +127,17 @@ CUSTOM_MIDDLEWARE = [
 ]
 
 MIDDLEWARE = DJANGO_MIDDLEWARE + CUSTOM_MIDDLEWARE
+
+INTERNAL_IPS = [
+    '0.0.0.0',
+    # 'web',
+]
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: DEBUG,
+}
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ROOT_URLCONF = 'project.urls'
 

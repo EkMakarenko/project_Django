@@ -29,11 +29,11 @@ class ApartmentInfoViewSet(viewsets.ModelViewSet):
     serializer_class = ApartmentInfoListSerializer
 
     filter_backends = (django_filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter)
-    filterset_class = ApartmentInfoFilter
-    ordering_fields = ('id', 'numer_of_beds', 'total_area', 'number_of_bathroom', 'price')
-    search_fields = ('numer_of_beds', 'total_area', 'number_of_bathroom', 'price', 'hotel__name')
-    pagination_class = ApartmentInfoPagination
-    permission_classes = (IsOwnerOrReadOnlyPermission, )
+    # filterset_class = ApartmentInfoFilter
+    # ordering_fields = ('id', 'numer_of_beds', 'total_area', 'number_of_bathroom', 'price')
+    # search_fields = ('numer_of_beds', 'total_area', 'number_of_bathroom', 'price', 'hotel__name')
+    # pagination_class = ApartmentInfoPagination
+    # permission_classes = (IsOwnerOrReadOnlyPermission, )
 
     serializer_classes = {
         'list': ApartmentInfoListSerializer,
@@ -78,9 +78,9 @@ class HotelViewSet(viewsets.ModelViewSet):
     filterset_class = HotelFilter
     ordering_fields = ('id', 'country', 'name', 'rating',)
     ordering = ('-rating', )
-    search_fields = ('country', 'city', 'name', 'rating',)
+    # search_fields = ('country', 'city', 'name', 'rating',)
     pagination_class = HotelPagination
-    permission_classes = (IsOwnerOrReadOnlyPermission,)
+    permission_classes = (IsAuthenticated, )
 
     serializer_classes = {
         'list': HotelListSerializer,
