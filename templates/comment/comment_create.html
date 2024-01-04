@@ -1,0 +1,8 @@
+<body>
+        <h2>Write a Comment for this Hotel:</h2>
+        <form method="post" action="{% url 'comment-create' hotel_id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+</body>
