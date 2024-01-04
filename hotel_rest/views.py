@@ -26,14 +26,14 @@ from hotel_rest.services import ImageService
 
 class ApartmentInfoViewSet(viewsets.ModelViewSet):
     queryset = ApartmentInfoRest.available_objects.all()
-    # serializer_class = ApartmentInfoListSerializer
+    serializer_class = ApartmentInfoListSerializer
 
-    # filter_backends = (django_filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter)
-    # filterset_class = ApartmentInfoFilter
-    # ordering_fields = ('id', 'numer_of_beds', 'total_area', 'number_of_bathroom', 'price')
-    # search_fields = ('numer_of_beds', 'total_area', 'number_of_bathroom', 'price', 'hotel__name')
-    # pagination_class = ApartmentInfoPagination
-    # permission_classes = (IsOwnerOrReadOnlyPermission, )
+    filter_backends = (django_filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter)
+    filterset_class = ApartmentInfoFilter
+    ordering_fields = ('id', 'numer_of_beds', 'total_area', 'number_of_bathroom', 'price')
+    search_fields = ('numer_of_beds', 'total_area', 'number_of_bathroom', 'price', 'hotel__name')
+    pagination_class = ApartmentInfoPagination
+    permission_classes = (IsOwnerOrReadOnlyPermission, )
 
     serializer_classes = {
         'list': ApartmentInfoListSerializer,
@@ -80,7 +80,7 @@ class HotelViewSet(viewsets.ModelViewSet):
     ordering = ('-rating', )
     search_fields = ('country', 'city', 'name', 'rating',)
     pagination_class = HotelPagination
-    # permission_classes = (IsOwnerOrReadOnlyPermission,)
+    permission_classes = (IsOwnerOrReadOnlyPermission,)
 
     serializer_classes = {
         'list': HotelListSerializer,

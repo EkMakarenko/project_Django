@@ -56,12 +56,24 @@ LOCAL_APPS = [
 THIRD_PARTY_APPS = [
     'ckeditor',
     'rest_framework',
-    # 'django_filters'
+    'django_filters',
     'djoser',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'drf_yasg',
 ]
 
 INSTALLED_APPS = CORE_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+        }
+    },
+    'USE_SESSION_AUTH': False,
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKEND': (

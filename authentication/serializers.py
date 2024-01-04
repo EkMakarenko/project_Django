@@ -26,6 +26,7 @@ class UserSerializer(BaseUserSerializer):
             'country',
             'city'
         )
+        ref_name = 'CustomUserSerializer'
 
 
 class UserCreateSerializer(BaseUserCreateSerializer):
@@ -36,6 +37,7 @@ class UserCreateSerializer(BaseUserCreateSerializer):
             'phone_number',
             'password'
         )
+        ref_name = 'CustomUserCreateSerializer'
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
@@ -52,3 +54,4 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             'country',
             'city'
         )
+        ref_name = 'CustomUserUpdateSerializer'

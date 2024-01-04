@@ -75,7 +75,7 @@ class ApartmentInfoImageUpdateSerializer(serializers.ModelSerializer):
 class ApartmentInfoRecentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ApartmentInfoRest
-        fields = ('hotel', 'total_area', 'number_of_bathroom', 'price', 'image_apartment',)
+        fields = ('total_area', 'number_of_bathroom', 'price',)
 
 
 class ApartmentInfoRetrieveSerializer(serializers.ModelSerializer):
