@@ -9,8 +9,8 @@ from feedback.tasks import send_email_task
 
 class FeedbackForm(forms.Form):
     name = forms.CharField(label='Your name')
-    email = forms.EmailField(label='Email Address')
-    message = forms.CharField(label='Message', widget=forms.Textarea(attrs={'rows': 20}))
+    email = forms.EmailField(label='Your Email Address')
+    message = forms.CharField(label='Your opinion', widget=forms.Textarea(attrs={'rows': 20}))
 
     def send_email(self):
         # sleep (20)
