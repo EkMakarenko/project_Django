@@ -43,6 +43,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('hotel.urls')),
     path('', include('comment.urls')),
+    path('feedback/', include('feedback.urls')),
     path('api/', include([
         path('', include('hotel_rest.urls')),
         path('', include('authentication.urls')),

@@ -46,6 +46,19 @@ services:
     networks:
       - main
 
+  celery:
+    build:
+      context: .
+    command: celery -A project worker -l info
+    depends_on:
+      - redis
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    networks:
+      - main
+
 
 
 networks:
@@ -54,3 +67,4 @@ networks:
 volumes:
   db:
   nginx:
+  celery:

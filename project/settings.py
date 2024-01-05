@@ -50,7 +50,8 @@ LOCAL_APPS = [
     'hotel',
     'comment',
     'hotel_rest',
-    'authentication'
+    'authentication',
+    'feedback',
 ]
 
 THIRD_PARTY_APPS = [
@@ -61,6 +62,7 @@ THIRD_PARTY_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
     'debug_toolbar',
+    'celery',
 ]
 
 INSTALLED_APPS = CORE_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -228,3 +230,10 @@ CKEDITOR_CONFIGS = {
         'weight': 300
     }
 }
+
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://redis:6379/0')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://redis:6379/0')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'

@@ -17,6 +17,7 @@ drf-yasg = "*"
 gunicorn = "*"
 django-debug-toolbar = "*"
 django-redis = "*"
+celery = "*"
 
 [dev-packages]
 
