@@ -1,0 +1,19 @@
+[
+  {
+    "model": "hotel.hotel",
+    "pk": 1,
+    "fields": {
+      "name": "Warsaw Apartments Bliska Wola",
+      "country": "Poland",
+      "city": "Warsaw",
+      "street": "Marcina Kasprzaka",
+      "house_number": 29,
+      "description": "null",
+      "photo_country":"",
+      "photo":"",
+      "rating": null,
+      "is_deleted": "False",
+      "apartment":""
+    }
+  }
+]

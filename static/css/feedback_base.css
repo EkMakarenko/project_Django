@@ -1,0 +1,24 @@
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid OliveDrab;
+    border-radius: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    color: OliveDrab;
+}
+
+title {
+    text-align: center;
+    color: OliveDrab;
+}
