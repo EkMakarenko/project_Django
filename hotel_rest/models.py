@@ -15,6 +15,7 @@ class HotelRest(models.Model):
     house_number = models.CharField(max_length=20, null=False)
     rating = models.FloatField(name=False, validators=[MinValueValidator(1.), MaxValueValidator(10.)])
     image_hotel = models.ImageField(upload_to='hotel_rest/', null=True, blank=True)
+    is_deleted = models.BooleanField(null=False, default=False)
 
     def __str__(self):
         return self.name
