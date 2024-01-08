@@ -15,12 +15,12 @@ celery_app.conf.beat_schedule = {
 
     'delete_deleted_hotels': {
         'task': 'hotel_rest.tasks.delete_deleted_hotels',
-        'schedule': crontab('0 0 1 */6 *'),
-        # 'schedule': crontab('*/2 * * * *'),
+        # 'schedule': crontab('0 0 * */6 *'),
+        'schedule': crontab('*/2 * * * *'),
     },
 
     'print_message': {
         'task': 'hotel_rest.tasks.print_message',
-        'schedule': crontab('*'),
+        'schedule': crontab('*/2 * * * *'),
     }
 }

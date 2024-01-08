@@ -74,13 +74,13 @@ class ApartmentInfoViewSet(viewsets.ModelViewSet):
 class HotelViewSet(viewsets.ModelViewSet):
     queryset = HotelRest.objects.all()
     serializer_class = HotelListSerializer
-    filter_backends = (django_filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter)
-    filterset_class = HotelFilter
-    ordering_fields = ('id', 'country', 'name', 'rating',)
-    ordering = ('-rating', )
-    # search_fields = ('country', 'city', 'name', 'rating',)
-    pagination_class = HotelPagination
-    permission_classes = (IsAuthenticated, )
+    # filter_backends = (django_filters.DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter)
+    # filterset_class = HotelFilter
+    # ordering_fields = ('id', 'country', 'name', 'rating',)
+    # ordering = ('-rating', )
+    # # search_fields = ('country', 'city', 'name', 'rating',)
+    # pagination_class = HotelPagination
+    # permission_classes = (IsAuthenticated, )
 
     serializer_classes = {
         'list': HotelListSerializer,
