@@ -1,0 +1,17 @@
+h2 {
+    color: OliveDrab;
+}
+
+a {
+    color: DarkSeaGreen;
+}
+
+button {
+    background-color: OliveDrab;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
